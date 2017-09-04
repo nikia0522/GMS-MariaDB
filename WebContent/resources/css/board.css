@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+@IMPORT "common.css";
+/* board_write.html */
+#wrapper{background-image: url("")}
+/*board_list.html*/
+#boardlist-tab{margin:0 auto; text-align: center; width:80%}
+#boardlist-tab-tr{background-color:rgb(255, 209, 133); text-align: center}
+.boardlist-tab-tr2{text-align: center; width:12.8%}

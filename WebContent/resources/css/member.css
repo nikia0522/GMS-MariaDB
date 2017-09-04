@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+@IMPORT "common.css";
+
+/* login.html */
+#index-tab{width:80%; margin:0 auto; text-align: center}
+#index-tab-tr>th{background-color:#f9c2d8; border: 1px solid black}
+#index-tab-tr>td{border: 1px solid black; width:30%; text-decoration:none}
+#index-tab-tr>td>ul{list-style-type:none}
+.gms-index-ul{width: 80%; list-style-type:none; text-align: center}
+.gms-index-ul>li{border: 1px solid black}
+.gms-index-ul>li>a{text-decoration:none}
+
+/* member_login */
+#login_id{display:inline-block; color:rgb(90,90,90); font-size: 20px; width:150px}
+#login_pass{display:inline-block; color:rgb(90,90,90); font-size: 20px; width:150px}
+#login_btn{text-align: center; width: 135px; height: 50px; background-color:rgb(255, 239, 116)}
+#cancel_btn{text-align: center; color:white; width: 135px; height: 50px; background-color:rgb(215, 0, 129)}
+
+/* member_add.html */
+#join_form{border-style: dotted; margin:0 auto}
+#join_id{display:inline-block; color:rgb(90,90,90); font-size: 20px; width: 150px}
+#join_pass{display:inline-block; color:rgb(90,90,90);font-size: 20px; width: 150px}
+#join_name{display:inline-block; color:rgb(90,90,90); font-size: 20px; width: 150px}
+#join_dob{display:inline-block; color:rgb(90,90,90); font-size: 20px; width: 150px}
+#join_email{display:inline-block; color:rgb(90,90,90); font-size: 20px; width: 150px}
+#join_phone{display:inline-block; color:rgb(90,90,90); font-size: 20px; width: 150px}
+#join_gender_male{color:rgb(90,90,90); font-size: 20px;}
+#join_gender_female{color:rgb(90,90,90); font-size: 20px;}
+#submit_btn{text-align: center; width: 135px; height: 30px; background-color:rgb(255, 239, 116)}
+#reset_btn{text-align: center; color:white;width: 135px; height: 30px; background-color:rgb(215, 0, 129)}@CHARSET "UTF-8";
+
+/* member_list */
+#member_list_tab{margin:0 auto; text-align: center}
+#member_list_tab th{background-color: #ccff99; border-bottom: 1px solid black; height: 40px;}
+#member_list_tab td{border-bottom: 1px solid #808080; height: 40px}
+
+/* member_search */
+#member_search_box{width:300px; margin:0 auto;}
+
+/* member_detail */
+#member_detail_tab{width:90%; margin:0 auto;}
+#member_detail_tab td{border:1px solid #808080; height:30px;}
