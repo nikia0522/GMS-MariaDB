@@ -31,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO{
 		List<MajorBean> list =(List<MajorBean>)map.get("major");
 		PreparedStatement pstmt=null;
 		try {
-			conn=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection();
+			conn=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection();
 			conn.setAutoCommit(false);
 			pstmt=conn.prepareStatement(SQL.MEMBER_INSERT);
 			pstmt.setString(1,member.getId());
@@ -69,11 +69,11 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public String countMembers(Command cmd) {
-		System.out.println("count("+cmd.getSearch()+")");
-		System.out.println("count("+cmd.getColumn()+")");
+		System.out.println("countSearch("+cmd.getSearch()+")");
+		System.out.println("countColumn("+cmd.getColumn()+")");
 		int count=0;	
 		try {
-			conn=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection();
+			conn=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection();
 			PreparedStatement pstmt=null;
 			if(cmd.getSearch()==null){
 				System.out.println("cmd.getSearch() is null");
@@ -100,7 +100,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public List<?> selectAll(Command cmd) {
 		List<StudentBean>list=new ArrayList<>();
 		try {
-			conn=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection();
+			conn=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection();
 			PreparedStatement pstmt=conn.prepareStatement(SQL.STUDENT_LIST);
 			pstmt.setString(1, cmd.getStartRow());
 			pstmt.setString(2, cmd.getEndRow());
@@ -108,14 +108,15 @@ public class MemberDAOImpl implements MemberDAO{
 			StudentBean member=null; //지역변수는 반드시 초기화
 			while(rs.next()){ //여러개 호출하기 때문에 while loop
 				member=new StudentBean();
-				member.setNum(rs.getString(DB.NUM));
+				System.out.println("mysql에서 @숫자"+rs.getString(DB.NO));
+				member.setNum(String.valueOf(rs.getInt(DB.NO)));
 				member.setId(rs.getString(DB.ID));
 				member.setName(rs.getString(DB.MEMBER_NAME));
 				member.setPhone(rs.getString(DB.MEMBER_PHONE));				
 				member.setEmail(rs.getString(DB.MEMBER_EMAIL));
 				member.setSsn(rs.getString(DB.MEMBER_SSN));
 				member.setRegdate(rs.getString(DB.REGDATE));
-				member.setTitle(rs.getString(DB.TITLE));
+				member.setSubjects(rs.getString(DB.SUBJECTS));
 				
 				list.add(member);
 			}
@@ -132,21 +133,21 @@ public class MemberDAOImpl implements MemberDAO{
 		List<StudentBean> list=new ArrayList<>();
 		System.out.println("DAO name"+cmd.getSearch());
 		try {
-			conn=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection();
+			conn=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection();
 			PreparedStatement pstmt=conn.prepareStatement(SQL.STUDENT_SEARCH);
 			pstmt.setString(1, cmd.getSearch());
 			ResultSet rs=pstmt.executeQuery();
 			StudentBean member=null; //지역변수는 반드시 초기화
 			while(rs.next()){ //여러개 호출하기 때문에 while loop
 				member=new StudentBean();
-				member.setNum(rs.getString(DB.NUM));
+				member.setNum(rs.getString(DB.NO));
 				member.setId(rs.getString(DB.ID));
 				member.setName(rs.getString(DB.MEMBER_NAME));
 				member.setPhone(rs.getString(DB.MEMBER_PHONE));				
 				member.setEmail(rs.getString(DB.MEMBER_EMAIL));
 				member.setSsn(rs.getString(DB.MEMBER_SSN));
 				member.setRegdate(rs.getString(DB.REGDATE));
-				member.setTitle(rs.getString(DB.TITLE));
+				member.setSubjects(rs.getString(DB.SUBJECTS));
 				
 				list.add(member);
 				
@@ -165,20 +166,19 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("ddd");
 		StudentBean member=null; //지역변수는 반드시 초기화
 		try {
-			conn=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection();
+			conn=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection();
 			PreparedStatement pstmt=conn.prepareStatement(SQL.STUDENT_FINDBYID);
 			pstmt.setString(1, cmd.getSearch());
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){ //여러개 호출하기 때문에 while loop
 				member=new StudentBean();
-				member.setNum(rs.getString(DB.NUM));
 				member.setId(rs.getString(DB.ID));
 				member.setName(rs.getString(DB.MEMBER_NAME));
 				member.setPhone(rs.getString(DB.MEMBER_PHONE));				
 				member.setEmail(rs.getString(DB.MEMBER_EMAIL));
 				member.setSsn(rs.getString(DB.MEMBER_SSN));
 				member.setRegdate(rs.getString(DB.REGDATE));
-				member.setTitle(rs.getString(DB.TITLE));
+				member.setSubjects(rs.getString(DB.SUBJECTS));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -191,7 +191,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public String updatePass(MemberBean member) {
 		String rs="";
 		try {
-			PreparedStatement psmt=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement(SQL.MEMBER_UPDATE);
+			PreparedStatement psmt=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement(SQL.MEMBER_UPDATE);
 			psmt.setString(1, member.getPassword());
 			psmt.setString(2, member.getId());
 			rs=String.valueOf(psmt.executeUpdate());
@@ -209,7 +209,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public String deleteMember(Command cmd) {
 		String rs="";
 		try {
-			PreparedStatement psmt=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement(SQL.MEMBER_DELETE);
+			PreparedStatement psmt=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement(SQL.MEMBER_DELETE);
 			psmt.setString(1,cmd.getSearch());
 			rs=String.valueOf(psmt.executeUpdate());		
 			} catch (Exception e) {
@@ -222,7 +222,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberBean login(Command cmd) {
 		MemberBean member=null;
 		try {
-			PreparedStatement pstmt=DatabaseFactory.createDatabase(Vendor.ORACLE, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement("SELECT * FROM Member WHERE member_id=?");
+			PreparedStatement pstmt=DatabaseFactory.createDatabase(Vendor.MARIADB, DB.USERNAME, DB.PASSWORD).getConnection().prepareStatement(SQL.MEMBER_FINDBYID);
 			pstmt.setString(1, cmd.getSearch());
 			ResultSet rs=pstmt.executeQuery();
 			if(rs.next()){

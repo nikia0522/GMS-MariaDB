@@ -3,7 +3,7 @@
 		<div>
  			<p>Posted by: LYL</p>
  			<p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
- 			<a href="../../../jdbc_test.jsp">DB 연결테스트</a>
+ 			<a href="${ctx}/jdbc_test.jsp">DB 연결테스트</a>
  			<a href="util/update_email.jsp">이메일 업데이트</a>
  			
 		</div>

@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="C:/Users/1027/SpringProjects/workspace/GMS/WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/1027/SpringProjects/workspace/GMS/WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/1027/SpringProjects/workspace/GMS/WebContent/WEB-INF/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/Users/1027/SpringProjects/mariadb-java-client-2.1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

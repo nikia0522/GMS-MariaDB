@@ -71,6 +71,7 @@ public class MemberServiceImpl implements MemberService{
 		cmd.setSearch(member.getId());
 		MemberBean mem=MemberDAOImpl.getInstance().login(cmd);
 		System.out.println("아이디야~~" + member.getId());
+		System.out.println("db에서받아온 비번" + mem.getPassword());
 		String page=(mem!=null)?((member.getPassword().equals(mem.getPassword()))?"main":"login_fail"):"join";
 		System.out.println("비번:::::"+member.getPassword());
 		/*3항 2번 쓴거*/	

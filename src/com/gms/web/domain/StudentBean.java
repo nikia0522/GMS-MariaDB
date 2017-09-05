@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class StudentBean {
-	private String num,id,name,ssn,regdate,phone,email,title;
+	private String num,id,name,ssn,regdate,phone,email,subjects;
 }

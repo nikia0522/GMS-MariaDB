@@ -120,6 +120,8 @@ drop table subject;
 CREATE TABLE Major(
 	major_id VARCHAR(10),
 	title VARCHAR(10),
+	subj_id VARCHAR(10),
+	member_id VARCHAR(10),
 	PRIMARY KEY(major_id)
 	);
 --DML
